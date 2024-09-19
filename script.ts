@@ -12,8 +12,9 @@ const twoPercent = document.getElementById("two-percent") as HTMLInputElement;
 const threePercent = document.getElementById("three-percent") as HTMLInputElement;
 const butSearchPlayer = document.getElementById("but-search-Players") as HTMLButtonElement;
 
-
 const table = document.getElementById("table") as HTMLTableSectionElement;
+
+const saveGroup = document.getElementById("save-group") as HTMLButtonElement;
 
 document.getElementById("form")!.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -21,9 +22,9 @@ document.getElementById("form")!.addEventListener('submit', function(event) {
 points.addEventListener('click', ()=>{document.getElementById("p-points")!.textContent = points.value;})
 twoPercent.addEventListener('click', ()=>{document.getElementById("p-two-percent")!.textContent = twoPercent.value;})
 threePercent.addEventListener('click', ()=>{document.getElementById("p-three-percent")!.textContent = threePercent.value;})
-butSearchPlayer.addEventListener('click', ()=>{CreateSearch();})
+butSearchPlayer.addEventListener('click', ()=>{CreateObject();});
 
-async function CreateSearch():Promise<void>{
+async function CreateObject():Promise<void>{
     const playerData: DataPlayersSearch = {
         position: PositionPlayer.value,
         twoPercent: +twoPercent.value,
@@ -34,7 +35,10 @@ async function CreateSearch():Promise<void>{
     twoPercent.value = "0";
     threePercent.value ="0";
     points.value = "0";
-    CreateTablePlayers(await addScooter(playerData));
+    document.getElementById("p-three-percent")!.textContent = "three percent";
+    document.getElementById("p-two-percent")!.textContent = "two percent";
+    document.getElementById("p-points")!.textContent = "points";
+    CreateTablePlayers(await SearchByParameters(playerData));
 }
 
 function CreateTablePlayers(listPlayers:Player[]){
@@ -65,16 +69,16 @@ function CreateTablePlayers(listPlayers:Player[]){
         
         const add = document.createElement("button");
         add.textContent = `Add ${obj.playerName.split(" ")[0]} to Current Team`;
-        add.addEventListener('click', ()=>{CreateGroup(obj);})
+        add.addEventListener('click', ()=>{CreatePlayerCard(obj);})
         div.appendChild(add);
 
         tr.appendChild(div);
-        
         table.appendChild(tr);
     })
+    
 }
 
-function CreateGroup(plyer:Player){
+function CreatePlayerCard(plyer:Player){
     const PlayerCar = document.getElementById(`${plyer.position}`) as HTMLDivElement;
    
     PlayerCar.textContent = " ";
@@ -96,6 +100,7 @@ function CreateGroup(plyer:Player){
     PlayerCar.appendChild(pPoints);
 }
 
+
 interface Player{
     position: string;
     twoPercent: Number;
@@ -111,15 +116,7 @@ interface DataPlayersSearch{
     points: Number;
 }
 
-const playerData: DataPlayersSearch = {
-    position: "C",
-    twoPercent: 45,
-    threePercent: 38,
-    points: 4
-};
-
-
-async function addScooter(DataPlayers:DataPlayersSearch):Promise<Player[]>{
+async function SearchByParameters(DataPlayers:DataPlayersSearch):Promise<Player[]>{
     try{
         
         const response = await fetch(`${BASE_URL}/api/filter`,{
@@ -140,5 +137,3 @@ async function addScooter(DataPlayers:DataPlayersSearch):Promise<Player[]>{
         throw new Error("error");
     }
 }
-//  addScooter(playerData).then((res) => { console.log(res);})
-

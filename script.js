@@ -20,14 +20,15 @@ const twoPercent = document.getElementById("two-percent");
 const threePercent = document.getElementById("three-percent");
 const butSearchPlayer = document.getElementById("but-search-Players");
 const table = document.getElementById("table");
+const saveGroup = document.getElementById("save-group");
 document.getElementById("form").addEventListener('submit', function (event) {
     event.preventDefault();
 });
 points.addEventListener('click', () => { document.getElementById("p-points").textContent = points.value; });
 twoPercent.addEventListener('click', () => { document.getElementById("p-two-percent").textContent = twoPercent.value; });
 threePercent.addEventListener('click', () => { document.getElementById("p-three-percent").textContent = threePercent.value; });
-butSearchPlayer.addEventListener('click', () => { CreateSearch(); });
-function CreateSearch() {
+butSearchPlayer.addEventListener('click', () => { CreateObject(); });
+function CreateObject() {
     return __awaiter(this, void 0, void 0, function* () {
         const playerData = {
             position: PositionPlayer.value,
@@ -39,10 +40,10 @@ function CreateSearch() {
         twoPercent.value = "0";
         threePercent.value = "0";
         points.value = "0";
-        document.getElementById("p-three-percent").textContent = "points";
+        document.getElementById("p-three-percent").textContent = "three percent";
         document.getElementById("p-two-percent").textContent = "two percent";
-        document.getElementById("p-points").textContent = "three percent";
-        CreateTablePlayers(yield addScooter(playerData));
+        document.getElementById("p-points").textContent = "points";
+        CreateTablePlayers(yield SearchByParameters(playerData));
     });
 }
 function CreateTablePlayers(listPlayers) {
@@ -66,13 +67,13 @@ function CreateTablePlayers(listPlayers) {
         const div = document.createElement("td");
         const add = document.createElement("button");
         add.textContent = `Add ${obj.playerName.split(" ")[0]} to Current Team`;
-        add.addEventListener('click', () => { CreateGroup(obj); });
+        add.addEventListener('click', () => { CreatePlayerCard(obj); });
         div.appendChild(add);
         tr.appendChild(div);
         table.appendChild(tr);
     });
 }
-function CreateGroup(plyer) {
+function CreatePlayerCard(plyer) {
     const PlayerCar = document.getElementById(`${plyer.position}`);
     PlayerCar.textContent = " ";
     const pPlayerName = document.createElement("p");
@@ -88,13 +89,7 @@ function CreateGroup(plyer) {
     pPoints.textContent = `Points : ${plyer.points} `;
     PlayerCar.appendChild(pPoints);
 }
-const playerData = {
-    position: "C",
-    twoPercent: 45,
-    threePercent: 38,
-    points: 4
-};
-function addScooter(DataPlayers) {
+function SearchByParameters(DataPlayers) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield fetch(`${BASE_URL}/api/filter`, {
@@ -116,4 +111,3 @@ function addScooter(DataPlayers) {
         }
     });
 }
-//  addScooter(playerData).then((res) => { console.log(res);})
