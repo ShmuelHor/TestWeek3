@@ -8,16 +8,29 @@
     <link rel='stylesheet' type='text/css' media='screen' href='./style.css'>
 </head>
 <body>
-    <div>
-        <h1>111</h1>
-        <div id="Player-card-PG" class="Player-card">pg</div>
-        <div id="Player-card-SG" class="Player-card">sg</div>
-        <div id="Player-card-SF" class="Player-card">sf</div>
-        <div id="Player-card-PF" class="Player-card">pf</div>
-        <div id="Player-card-C" class="Player-card">c</div>
+    <div id="up">
+        NBA FANTASY 2014-2024
     </div>
-    <h1>aa</h1>
-    <div>
+    <h1 class="header">My Fantasy Team</h1>
+    <div id="Player-card">
+        <div id="Player-card-PG" class="Player-card"><p class="header">Point Guard</p>
+            <div id="PG"></div>
+        </div>
+        <div id="Player-card-SG" class="Player-card"><p class="header">Shooting Guard</p>
+            <div id="SG"></div>
+        </div>
+        <div id="Player-card-SF" class="Player-card"><p class="header">Small Forward</p>
+            <div id="SF"></div>
+        </div>
+        <div id="Player-card-PF" class="Player-card"><p class="header">Power Forward</p>
+            <div id="PF"></div>
+        </div>
+        <div id="Player-card-C" class="Player-card"><p class="header">Center</p>
+            <div id="C"></div>
+        </div>
+    </div>
+    <h1 class="header" >NBA Player Search</h1>
+    <div id="search">
         <form id="form">
             <select id="Position-player-select" >
                 <option value="PG">PG</option>
@@ -26,9 +39,18 @@
                 <option value="PF">PF</option>
                 <option value="C">C</option>
             </select>
-            <input id="points" type="range" min="0" max="20000" value="0">
-            <input id="two-percent" type="range" min="0" max="100" value="0">
-            <input id="three-percent" type="range" min="0" max="100" value="0">
+            <div class="p">
+                <p id="p-points">points</p>
+                <input id="points" type="range" min="0" max="20000" value="0">
+            </div>
+            <div class="p">
+                <p id="p-two-percent">two percent</p>
+                <input id="two-percent" type="range" min="0" max="100" value="0">
+            </div>
+            <div class="p">
+                <p id="p-three-percent">three percent</p>
+                <input id="three-percent" type="range" min="0" max="100" value="0">
+            </div>
             <button id="but-search-Players">Search Player</button>
 
             <table >
@@ -40,8 +62,7 @@
                         <th>points</th>
                         <th>FG%</th>
                         <th>3P%</th>
-                        <th>Action</th>
-                        <th> </th>
+                        <th id="a">Action</th>
                     </tr>
                 </thead>
     

@@ -12,12 +12,15 @@ const twoPercent = document.getElementById("two-percent") as HTMLInputElement;
 const threePercent = document.getElementById("three-percent") as HTMLInputElement;
 const butSearchPlayer = document.getElementById("but-search-Players") as HTMLButtonElement;
 
+
 const table = document.getElementById("table") as HTMLTableSectionElement;
 
 document.getElementById("form")!.addEventListener('submit', function(event) {
     event.preventDefault();
 });
-
+points.addEventListener('click', ()=>{document.getElementById("p-points")!.textContent = points.value;})
+twoPercent.addEventListener('click', ()=>{document.getElementById("p-two-percent")!.textContent = twoPercent.value;})
+threePercent.addEventListener('click', ()=>{document.getElementById("p-three-percent")!.textContent = threePercent.value;})
 butSearchPlayer.addEventListener('click', ()=>{CreateSearch();})
 
 async function CreateSearch():Promise<void>{
@@ -58,11 +61,11 @@ function CreateTablePlayers(listPlayers:Player[]){
         threePercent.textContent = obj.threePercent.toString();
         tr.appendChild(threePercent);
         
-        const div = document.createElement("div");
+        const div = document.createElement("td");
         
         const add = document.createElement("button");
         add.textContent = `Add ${obj.playerName.split(" ")[0]} to Current Team`;
-        // add.addEventListener('click', ()=>{Delete(obj.id);})
+        add.addEventListener('click', ()=>{CreateGroup(obj);})
         div.appendChild(add);
 
         tr.appendChild(div);
@@ -72,7 +75,25 @@ function CreateTablePlayers(listPlayers:Player[]){
 }
 
 function CreateGroup(plyer:Player){
-    
+    const PlayerCar = document.getElementById(`${plyer.position}`) as HTMLDivElement;
+   
+    PlayerCar.textContent = " ";
+
+    const pPlayerName = document.createElement("p");
+    pPlayerName.textContent = plyer.playerName.toString();
+    PlayerCar.appendChild(pPlayerName);
+
+    const pThreePercent = document.createElement("p");
+    pThreePercent.textContent = `Three Percents : ${plyer.threePercent} `;
+    PlayerCar.appendChild(pThreePercent);
+
+    const pTwoPercent = document.createElement("p");
+    pTwoPercent.textContent = `Three Percents : ${plyer.twoPercent} `;
+    PlayerCar.appendChild(pTwoPercent);
+
+    const pPoints = document.createElement("p");
+    pPoints.textContent = `Points : ${plyer.points} `;
+    PlayerCar.appendChild(pPoints);
 }
 
 interface Player{

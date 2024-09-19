@@ -1,6 +1,111 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+#Player-card{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
 .Player-card{
-    background-color: rgba(142, 142, 185, 0.411);
-    width: 100px;
-    height: 80px;
-    margin: 5px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+    background-color: #f0f0f0;
+    width:150px;
+   
+    margin: 25px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.header{
+    color:#17408b ;
+}
+
+
+
+#search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    width: 530px;
+    padding: 20px;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 10px;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    
+}
+
+th {
+    background-color: #c9082a;
+    color: white;
+}
+
+#valueDisplay {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+button{
+    background-color:#17408b ;
+    color: white;
+    border-radius: 5px;
+    /* margin: 10px; */
+}
+button:hover{
+    background-color:#0e2b61 ;
+    color: white;
+    border-radius: 5px;
+}
+
+input , select{
+    width: 350px;
+    height: 30px;
+}
+.p{
+    
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#p-points , #p-two-percent ,#p-three-percent{
+    margin-top: 8px;
+    background-color: gray;
+    color: white;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+#up{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #17408b;
+    color: white;
+    width: 100%;
+    height: 50px;
 }

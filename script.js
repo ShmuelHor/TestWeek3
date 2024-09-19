@@ -23,6 +23,9 @@ const table = document.getElementById("table");
 document.getElementById("form").addEventListener('submit', function (event) {
     event.preventDefault();
 });
+points.addEventListener('click', () => { document.getElementById("p-points").textContent = points.value; });
+twoPercent.addEventListener('click', () => { document.getElementById("p-two-percent").textContent = twoPercent.value; });
+threePercent.addEventListener('click', () => { document.getElementById("p-three-percent").textContent = threePercent.value; });
 butSearchPlayer.addEventListener('click', () => { CreateSearch(); });
 function CreateSearch() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -36,6 +39,9 @@ function CreateSearch() {
         twoPercent.value = "0";
         threePercent.value = "0";
         points.value = "0";
+        document.getElementById("p-three-percent").textContent = "points";
+        document.getElementById("p-two-percent").textContent = "two percent";
+        document.getElementById("p-points").textContent = "three percent";
         CreateTablePlayers(yield addScooter(playerData));
     });
 }
@@ -57,16 +63,30 @@ function CreateTablePlayers(listPlayers) {
         const threePercent = document.createElement("td");
         threePercent.textContent = obj.threePercent.toString();
         tr.appendChild(threePercent);
-        const div = document.createElement("div");
+        const div = document.createElement("td");
         const add = document.createElement("button");
         add.textContent = `Add ${obj.playerName.split(" ")[0]} to Current Team`;
-        // add.addEventListener('click', ()=>{Delete(obj.id);})
+        add.addEventListener('click', () => { CreateGroup(obj); });
         div.appendChild(add);
         tr.appendChild(div);
         table.appendChild(tr);
     });
 }
 function CreateGroup(plyer) {
+    const PlayerCar = document.getElementById(`${plyer.position}`);
+    PlayerCar.textContent = " ";
+    const pPlayerName = document.createElement("p");
+    pPlayerName.textContent = plyer.playerName.toString();
+    PlayerCar.appendChild(pPlayerName);
+    const pThreePercent = document.createElement("p");
+    pThreePercent.textContent = `Three Percents : ${plyer.threePercent} `;
+    PlayerCar.appendChild(pThreePercent);
+    const pTwoPercent = document.createElement("p");
+    pTwoPercent.textContent = `Three Percents : ${plyer.twoPercent} `;
+    PlayerCar.appendChild(pTwoPercent);
+    const pPoints = document.createElement("p");
+    pPoints.textContent = `Points : ${plyer.points} `;
+    PlayerCar.appendChild(pPoints);
 }
 const playerData = {
     position: "C",
